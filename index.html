@@ -81,6 +81,29 @@
     .testimonial:hover {
       transform: scale(1.03);
     }
+    .urgency {
+      background-color: #ff5050;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.3rem;
+      animation: pulse 1.5s infinite;
+      border-radius: 8px;
+      margin: 2rem 0;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    .countdown {
+      font-size: 2rem;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 1rem;
+      color: #ffcc00;
+    }
     footer {
       text-align: center;
       padding: 1rem;
@@ -90,6 +113,7 @@
   </style>
 </head>
 <body>
+  <div class="countdown" id="top-countdown"></div>
   <header>
     <h1>Desinche, Energize e Renove-se</h1>
     <p>Comece hoje seu Detox de 7 Dias com apoio completo</p>
@@ -128,13 +152,51 @@
       </div>
     </section>
 
+    <div class="urgency">
+      ⚠️ Vagas limitadas! Garanta agora seu acesso com desconto exclusivo! ⚡
+      <div class="countdown" id="countdown"></div>
+    </div>
+
     <section style="text-align: center;">
-      <a class="button" href="https://seulinkkiwify.com">Quero Começar Agora</a>
+      <a class="button" href="https://pay.kiwify.com.br/SLss2UN">Quero Começar Agora</a>
     </section>
   </div>
 
   <footer>
     Material 100% digital – acesso imediato após a compra.
   </footer>
+
+  <script>
+    let time = 600;
+    const countdown = document.getElementById('countdown');
+
+    function updateTimer() {
+      const minutes = Math.floor(time / 60);
+      const seconds = time % 60;
+      countdown.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      if (time > 0) {
+        time--;
+        setTimeout(updateTimer, 1000);
+      } else {
+        countdown.textContent = "Oferta encerrada!";
+      }
+    }
+
+    updateTimer();
+    const topCountdown = document.getElementById('top-countdown');
+
+  function updateTopTimer() {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    topCountdown.textContent = `⏳ Oferta acaba em: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    if (time > 0) {
+      setTimeout(updateTopTimer, 1000);
+    } else {
+      window.location.href = "https://pay.kiwify.com.br/SLss2UN";
+    }
+  }
+
+  updateTopTimer();
+</script>
 </body>
 </html>
